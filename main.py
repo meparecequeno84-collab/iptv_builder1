@@ -23,26 +23,36 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.popup import Popup
 from kivy.uix.progressbar import ProgressBar
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
-from kivy.uix.video import Video
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.graphics import Color, Rectangle
 
 try:
+    from kivy.uix.video import Video
+    HAS_VIDEO = True
+except Exception:
+    HAS_VIDEO = False
+
+try:
     from plyer import filechooser
     HAS_FILECHOOSER = True
-except ImportError:
+except Exception:
     HAS_FILECHOOSER = False
 
 try:
     from bs4 import BeautifulSoup
     HAS_BS4 = True
-except ImportError:
+except Exception:
     HAS_BS4 = False
 
+IS_ANDROID = sys.platform == 'android'
+
 Window.clearcolor = (0.08, 0.08, 0.12, 1)
-Window.fullscreen = False
-Window.size = (1024, 600)
+if IS_ANDROID:
+    Window.fullscreen = True
+else:
+    Window.fullscreen = False
+    Window.size = (1024, 600)
 
 FOCUS_COLOR = (0.3, 0.6, 1.0, 1)
 UNFOCUS_COLOR = None
@@ -1356,4 +1366,24 @@ class IPTVFinderApp(App):
 
 
 if __name__ == '__main__':
-    IPTVFinderApp().run()
+    import traceback
+    def exception_handler(value, tb):
+        try:
+            log_path = os.path.join(os.path.expanduser('~'), '.iptv_finder', 'crash.log')
+            os.makedirs(os.path.dirname(log_path), exist_ok=True)
+            with open(log_path, 'a', encoding='utf-8') as f:
+                f.write(f'\n{"="*60}\n')
+                traceback.print_exception(value, tb, file=f)
+        except Exception:
+            pass
+    sys.excepthook = exception_handler
+    try:
+        IPTVFinderApp().run()
+    except Exception as e:
+        try:
+            log_path = os.path.join(os.path.expanduser('~'), '.iptv_finder', 'crash.log')
+            with open(log_path, 'a', encoding='utf-8') as f:
+                f.write(f'\nFATAL: {e}\n{traceback.format_exc()}\n')
+        except Exception:
+            pass
+        raise
