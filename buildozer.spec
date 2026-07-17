@@ -16,7 +16,7 @@ orientation = landscape
 
 fullscreen = 0
 
-android.permissions = INTERNET,ACCESS_NETWORK_STATE
+android.permissions = INTERNET,ACCESS_NETWORK_STATE,BLUETOOTH,BLUETOOTH_CONNECT
 
 android.api = 28
 android.minapi = 21
