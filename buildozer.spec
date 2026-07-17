@@ -20,10 +20,10 @@ android.permissions = INTERNET,ACCESS_NETWORK_STATE
 
 android.api = 28
 android.minapi = 21
-android.ndk = 21e
+android.ndk = 28c
 android.accept_sdk_license = True
 
-android.archs = armeabi
+android.archs = armeabi-v7a
 
 android.log_level = 2
 
