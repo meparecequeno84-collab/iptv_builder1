@@ -1,4 +1,4 @@
-name: Build APK
+name: Build APK (ARM)
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
           source venv/bin/activate
           pip install buildozer cython==0.29.37
 
-      - name: Build APK
+      - name: Build APK (ARM)
         run: |
           source venv/bin/activate
           yes | buildozer android debug 2>&1 | tee build.log
@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: iptv-finder-apk
+          name: iptv-finder-apk-arm
           path: bin/*.apk
           if-no-files-found: warn
 
@@ -58,6 +58,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: build-log
+          name: build-log-arm
           path: build.log
           if-no-files-found: warn
