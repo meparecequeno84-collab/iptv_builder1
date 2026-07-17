@@ -18,7 +18,7 @@ fullscreen = 0
 
 android.permissions = INTERNET,ACCESS_NETWORK_STATE,BLUETOOTH,BLUETOOTH_CONNECT
 
-android.api = 28
+android.api = 33
 android.minapi = 21
 android.ndk = 28c
 android.accept_sdk_license = True
