@@ -10,7 +10,7 @@ source.include_patterns = assets/*
 
 version = 2.1
 
-requirements = python3,kivy,certifi,charset-normalizer,cffi,urllib3,requests,idna,packaging,beautifulsoup4,soupsieve,ffpyplayer,plyer
+requirements = python3,kivy,certifi,charset-normalizer,cffi,urllib3,requests,idna,packaging,beautifulsoup4,soupsieve,plyer
 
 orientation = landscape
 
